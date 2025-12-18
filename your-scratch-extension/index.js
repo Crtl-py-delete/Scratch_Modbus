@@ -14,14 +14,14 @@ class Scratch3YourExtension {
     getInfo () {
         return {
             // unique ID for your extension
-            id: 'yourScratchExtension',
+            id: 'ModbusScratchExtension',
 
             // name that will be displayed in the Scratch UI
-            name: 'Demo',
+            name: 'Communication',
 
             // colours to use for your extension blocks
-            color1: '#000099',
-            color2: '#660066',
+            color1: '#79b2c6ff',
+            color2: '#ff0454ff',
 
             // icons to display
             blockIconURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAAAAACyOJm3AAAAFklEQVQYV2P4DwMMEMgAI/+DEUIMBgAEWB7i7uidhAAAAABJRU5ErkJggg==',
@@ -31,7 +31,7 @@ class Scratch3YourExtension {
             blocks: [
                 {
                     // name of the function where your block code lives
-                    opcode: 'myFirstBlock',
+                    opcode: 'TestBlock',
 
                     // type of block - choose from:
                     //   BlockType.REPORTER - returns a value, like "direction"
@@ -56,7 +56,7 @@ class Scratch3YourExtension {
                     arguments: {
                         MY_NUMBER: {
                             // default value before the user sets something
-                            defaultValue: 123,
+                            defaultValue: 67,
 
                             // type/shape of the parameter - choose from:
                             //     ArgumentType.ANGLE - numeric value with an angle picker
@@ -69,7 +69,7 @@ class Scratch3YourExtension {
                         },
                         MY_STRING: {
                             // default value before the user sets something
-                            defaultValue: 'hello',
+                            defaultValue: 'Vives student',
 
                             // type/shape of the parameter - choose from:
                             //     ArgumentType.ANGLE - numeric value with an angle picker
@@ -91,7 +91,7 @@ class Scratch3YourExtension {
      * implementation of the block with the opcode that matches this name
      *  this will be called when the block is used
      */
-    myFirstBlock ({ MY_NUMBER, MY_STRING }) {
+    TestBlock({ MY_NUMBER, MY_STRING }) {
         // example implementation to return a string
         return MY_STRING + ' : doubled would be ' + (MY_NUMBER * 2);
     }
