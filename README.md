@@ -1,6 +1,6 @@
 # Development environment for creating unofficial Scratch extensions
 
-This is a repo for [my workshop](https://www.eventbrite.co.uk/e/workshop-write-your-own-scratch-extension-tickets-533502218497) at the [Raspberry Pi Clubs Conference](https://www.raspberrypi.org/clubs-conference-2023/) - about how to create your own custom blocks for Scratch.
+This is a repo to create your own custom blocks for Scratch, in this exaple I implemented Modbus in to Scratch.
 
 This repo has [instructions](./INSTRUCTIONS.md), a template extension, and an online hosted development environment, so you can create your own Scratch extensions using only a web browser. No local developmnent tools or other software is needed.
 
