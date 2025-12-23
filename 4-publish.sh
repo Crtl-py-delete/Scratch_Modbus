@@ -20,9 +20,9 @@ if [[ $BASH_SOURCE = */* ]]; then
 fi
 
 echo "Commit any changes"
-git add your-scratch-extension
-git add dependencies
+git add -A
 git commit -m "Update"
+git pull --rebase origin master || { echo "git pull --rebase failed. Los eventuele conflicten op en probeer opnieuw."; exit 1; }
 git push origin master
 
 echo "Building the Scratch fork"

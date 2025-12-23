@@ -1,0 +1,19 @@
+{
+  "name": "scratch_modbus",
+  "version": "1.0.0",
+  "description": "This is a repo for [my workshop](https://www.eventbrite.co.uk/e/workshop-write-your-own-scratch-extension-tickets-533502218497) at the [Raspberry Pi Clubs Conference](https://www.raspberrypi.org/clubs-conference-2023/) - about how to create your own custom blocks for Scratch.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "modbus-serial": "^8.0.23",
+    "ws": "^8.18.3"
+  }
+}
