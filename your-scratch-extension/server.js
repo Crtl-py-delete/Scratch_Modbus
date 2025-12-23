@@ -1,10 +1,12 @@
 const WebSocket = require('ws');
 const ModbusRTU = require('modbus-serial');
-
+//poort niet wijzigen!!
 const wss = new WebSocket.Server({ port: 8080, host: '0.0.0.0' });
 const modbus = new ModbusRTU();
 
 let connected = false;
+// modbus adress, mag je wel wijzigen.
+let modbus_port = 502;
 
 wss.on('connection', ws => {
     console.log('Scratch connected');
@@ -15,7 +17,7 @@ wss.on('connection', ws => {
 
             // CONNECT
             if (cmd.type === 'connect') {
-                await modbus.connectTCP(cmd.ip, { port: 502 });
+                await modbus.connectTCP(cmd.ip, { port: modbus_port });
                 modbus.setID(cmd.unitId);
                 connected = true;
 
@@ -33,6 +35,28 @@ wss.on('connection', ws => {
                 }));
             }
 
+            // READ COILS
+            if (cmd.type === 'readCoils') {
+                if (!connected) throw new Error('Not connected');
+
+                const res = await modbus.readCoils(cmd.address, 1);
+                ws.send(JSON.stringify({
+                    type: 'coilValue',
+                    value: res.data[0]
+                }));
+            }
+
+            // READ INPUT STATUS (Discrete Inputs)
+            if (cmd.type === 'readInputStatus') {
+                if (!connected) throw new Error('Not connected');
+
+                const res = await modbus.readDiscreteInputs(cmd.address, 1);
+                ws.send(JSON.stringify({
+                    type: 'inputStatusValue',
+                    value: res.data[0]
+                }));
+            }
+
         } catch (err) {
             ws.send(JSON.stringify({
                 type: 'error',
@@ -42,4 +66,5 @@ wss.on('connection', ws => {
     });
 });
 
-console.log('Modbus helper running on ws://localhost:8080');
+console.log('Modbus WebSocket server running on ws://localhost:8080');
+console.log('Modbus TCP port: ' + modbus_port);
