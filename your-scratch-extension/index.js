@@ -1,3 +1,4 @@
+
 const BlockType = require('../../extension-support/block-type');
 const ArgumentType = require('../../extension-support/argument-type');
 
@@ -35,13 +36,13 @@ class Scratch3Modbus {
             id: 'modbus',
             name: 'Modbus TCP',
             color1: '#4b9cd3',
-            color2: '#3478a3',
+            color2: '#349aa3',
 
             blocks: [
                 {
                     opcode: 'connect',
                     blockType: BlockType.COMMAND,
-                    text: 'connect Modbus TCP ip [IP] unit [UNIT]',
+                    text: 'Connect Modbus TCP ip [IP] unit [UNIT]',
                     arguments: {
                         IP: {
                             type: ArgumentType.STRING,
@@ -56,7 +57,7 @@ class Scratch3Modbus {
                 {
                     opcode: 'readHolding',
                     blockType: BlockType.REPORTER,
-                    text: 'read holding register [ADDR]',
+                    text: 'Read holding register [ADDR]',
                     arguments: {
                         ADDR: {
                             type: ArgumentType.NUMBER,
@@ -67,7 +68,7 @@ class Scratch3Modbus {
                 {
                     opcode: 'readCoils',
                     blockType: BlockType.REPORTER,
-                    text: 'read coil [ADDR]',
+                    text: 'Read coil status [ADDR]',
                     arguments: {
                         ADDR: {
                             type: ArgumentType.NUMBER,
@@ -78,13 +79,18 @@ class Scratch3Modbus {
                 {
                     opcode: 'readInputStatus',
                     blockType: BlockType.REPORTER,
-                    text: 'read input status [ADDR]',
+                    text: 'Read input status [ADDR]',
                     arguments: {
                         ADDR: {
                             type: ArgumentType.NUMBER,
                             defaultValue: 0
                         }
                     }
+                },
+                {
+                    opcode: 'isServerConnected',
+                    blockType: BlockType.REPORTER,
+                    text: 'Modbus server verbonden?'
                 }
             ]
         };
@@ -132,7 +138,10 @@ class Scratch3Modbus {
         // Scratch reporters must return immediately
         return this.lastInputStatusValue;
     }
-
+    isServerConnected() {
+        // Controleer of de websocket open is
+        return this.ws && this.ws.readyState === 1;
+    }
     }
 
 module.exports = Scratch3Modbus;
